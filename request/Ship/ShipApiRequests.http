@@ -1,0 +1,36 @@
+
+
+@host=http://localhost:5148/api/v1.0
+
+### Create
+POST  {{host}}/ship/create
+Content-Type: application/json
+
+{
+  "name":"LongShip",
+  "length": 101,
+  "width": 202,
+  "code": "AAAA-1234-E5"
+}
+
+### List
+
+GET  {{host}}/ship/list
+Content-Type: application/json
+
+### Update
+
+PUT  {{host}}/ship/update/{Id}
+Content-Type: application/json
+
+{  
+  "name": "WhiteShip",
+  "length": 120,
+  "width": 122,
+  "code": "AAAA-1111-A1"
+}
+
+### Delete
+
+DELETE  {{host}}/ship/delete/{id}
+Content-Type: application/json
