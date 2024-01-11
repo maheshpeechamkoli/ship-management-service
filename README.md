@@ -1,6 +1,6 @@
-# SHIP MANAGEMENT API VERSION 1.0
+# SHIP MANAGEMENT API SERVICE (Version 1.0)
 
-RESTFull API Service to perform CRUD (Create, Read, Update & Delete) operations on a ship.
+Robust ASP.NET Core Web API Service for CRUD Operations with Clean Architecture and Unit Testing.
 
 ## Table of Contents
 
@@ -20,19 +20,17 @@ Each ship must have a name (string), length (in meters), width (in meters), and 
 
 ### Prerequisites
 
-    1. Downlaod for Windows
+1. Downlaod .NET Core SDK for Windows
 
-    ```shell
-    - [.NET Core SDK](https://dotnet.microsoft.com/download) installed
-    ```
+```
+https://dotnet.microsoft.com/download 
+```
 
-    2. CLI
+2. .NET Core SDK CLI for Mac
 
-    onMac
-
-    ```shell
-        brew install --cask dotnet-sdk
-    ```
+```
+brew install --cask dotnet-sdk
+```
 
 ### Packages
 
@@ -54,109 +52,146 @@ Each ship must have a name (string), length (in meters), width (in meters), and 
 
 ### Installation
 
-1. Clone the repository:
+#### Clone the repository:
 
-Open your terminal or command prompt, go to the desired directory, and use the following command to clone the .NET Core Web API project:
+  Open your terminal or command prompt, go to the desired directory, and use the following command to clone the .NET Core Web API project:
 
-    ```shell
-    git clone https://github.com/yourusername/your-webapi-repo.git
-    cd your-webapi-repo
-    ```
+  ```
+  git clone https://github.com/maheshpeechamkoli/ship-management-service.git
+  cd ship-management-service
+  ```
 
-2. Build the project:
+#### Build the project:
 
-   ```shell
-   dotnet build
-   ```
+  ```
+  dotnet build
+  ```
 
 ### Running the Application
 
 Run your .NET Core Web API using the following command:
 
-    ```shell
-    cd .\src\ShipService.Api\
+```
+cd .\src\ShipManagement.Api\
+```
 
-    dotnet run or dotnet watch run
-    ```
+```
+dotnet run 
+```
+
+or 
+
+```
+dotnet watch run
+```
 
 ## API Documentation
 
 ### Crete API
 
-#### Request
+#### Request Body
 
-    ```yaml
-    POST  {{host}}/ship/create
-    Content-Type: application/json
-    ```
+  ```
+  POST  {{host}}/ship/create
+  Content-Type: application/json
+  
+  {
+    "name":"LongShip",
+    "length": 101,
+    "width": 202,
+    "code": "AAAA-1234-E5"
+  }
+  ```
 
-    ```http
-        {
-        "name":"LongShip",
-        "length": 101,
-        "width": 202,
-        "code": "AAAA-1234-E5"
-        }
-    ```
+#### Response Body
 
-#### Response
+  Status Code : 200
+  ```
+  {
+    "success": true,
+    "message": "Ship created successfully"
+  }
+  ```
 
 ### List API
 
-#### Request
+#### Request Body
 
-    ```yaml
-    GET  {{host}}/ship/list
-    Content-Type: application/json
-    ```
+  ```
+  GET  {{host}}/ship/list
+  Content-Type: application/json
+  ```
 
-#### Response
+#### Response Body
 
-    ```http
-        {
-            "id":""
-            "name":"LongShip",
-            "length": 101,
-            "width": 202,
-            "code": "AAAA-1234-E5"
-        }
-    ```
+  Status Code : 200
+  ```
+  [
+    {
+      "id": "c56268a5-661e-418f-9b27-4be0e424c6d5",
+      "name": "LongShip",
+      "length": 101,
+      "width": 202,
+      "code": "AAAA-1234-E5"
+    }
+  ]
+  ```
 
 ### Update API
 
-#### Request
+#### Request Body
 
-    ```yaml
-    PUT  {{host}}/ship/update/{Id}
-    Content-Type: application/json
-    ```
+  ```
+  PUT  {{host}}/ship/update/{Id}
+  Content-Type: application/json
+  ```
 
-    ```http
-        {
-            "name": "WhiteShip",
-            "length": 120,
-            "width": 122,
-            "code": "AAAA-1111-A1"
-        }
-    ```
+  ```
+  {
+      "name": "WhiteShip",
+      "length": 120,
+      "width": 122,
+      "code": "AAAA-1111-A1"
+  }
+  ```
 
-#### Response
+#### Response Body 
+
+  Status Code : 200
+  ```
+  {
+    "success": true,
+    "message": "Ship updated successfully"
+  }
+  ```
 
 ### Delete API
 
-#### Request
+#### Request Body
 
-    ```yaml
-    DELETE  {{host}}/ship/delete/{id}
-    Content-Type: application/json
-    ```
+  ```
+  DELETE  {{host}}/ship/delete/{id}
+  Content-Type: application/json
+  ```
+
+#### Response Body
+
+  Status Code : 200
+  ```
+  {
+    "success": true,
+    "message": "Ship deleted successfully"
+  }
+  ```
 
 ## Folder Structure
 
 ### --src
 
-![Folder structure](assets/CleanArchitectureFolderStucture.jpg)
+![Folder structure](assets/CleanArchitectureFolderStructure.jpg)
 
 ### --tests
 
 ![Folder structure](assets/TestFolderStructure.png)
+
+
