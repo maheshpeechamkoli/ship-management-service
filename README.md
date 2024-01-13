@@ -6,7 +6,6 @@ Robust ASP.NET Core Web API Service for CRUD Operations with Clean Architecture 
 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
-  - [Prerequisites](#prerequisites)
   - [Packages](#packages)
   - [Running the Application](#running-the-application)
 - [API Documentation](#api-documentation)
@@ -33,7 +32,34 @@ cd ship-management-service
 docker compose up
 ```
 
+Open the swagger URL
+
+```
+http://localhost:5001/swagger/index.html
+```
+
+Or
+
+```
+ . Install RESTClient VSCode extension
+ . request/Ship/ShipApiRequest.http
+```
+
 ### Running the Application with the .NET CLI
+
+1. Downlaod .NET Core SDK for Windows
+
+```
+https://dotnet.microsoft.com/download
+```
+
+2. .NET Core SDK CLI for Mac
+
+```
+brew install --cask dotnet-sdk
+```
+
+##### Navigate to root directory
 
 ```
 dotnet build
@@ -72,20 +98,6 @@ cd .\tests\ShipManagement.Infrasructure.Tests\
 
 ```
 dotnet test
-```
-
-### Prerequisites
-
-1. Downlaod .NET Core SDK for Windows
-
-```
-https://dotnet.microsoft.com/download
-```
-
-2. .NET Core SDK CLI for Mac
-
-```
-brew install --cask dotnet-sdk
 ```
 
 ### Packages
