@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.OpenApi.Models;
 using ShipManagement.Api.Filters;
 using ShipManagement.Application;
 using ShipManagement.Infrastructure;
@@ -21,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
             new HeaderApiVersionReader("X-Version"),
             new MediaTypeApiVersionReader("ver"));
     });
+
 }
 
 var app = builder.Build();
@@ -31,6 +31,8 @@ var app = builder.Build();
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173"));
     app.UseHttpsRedirection();
     app.MapControllers();
     app.Run();
