@@ -7,7 +7,7 @@ POST  {{host}}/ship/create
 Content-Type: application/json
 
 {
-  "name":"LongShip",
+  "name":"Ship1",
   "length": 101,
   "width": 202,
   "code": "AAAA-1234-E5"
