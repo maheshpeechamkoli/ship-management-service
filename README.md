@@ -5,25 +5,81 @@ Robust ASP.NET Core Web API Service for CRUD Operations with Clean Architecture 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
+  - [Installation](#installation)
   - [Prerequisites](#prerequisites)
   - [Packages](#packages)
-  - [Installation](#installation)
   - [Running the Application](#running-the-application)
 - [API Documentation](#api-documentation)
 - [Folder Structure](#folder-structure)
 
 ## Getting Started
 
-A ASP.NET Core Web API RESTful service. It includes basic CRUD operations on a (Ship Management System).
+Ship Management System using ASP.NET Core Web API (.net8). This service will allow basic operations (Create, Read, Update, Delete) for ships. Each ship is defined by a name, length (in meters), width (in meters), and a unique code
 
-Each ship must have a name (string), length (in meters), width (in meters), and code.
+### Installation
+
+#### Clone the repository:
+
+Open your terminal or command prompt, go to the desired directory, and use the following command to clone the .NET Core Web API project:
+
+```
+git clone https://github.com/maheshpeechamkoli/ship-management-service.git
+cd ship-management-service
+```
+
+### Running the Application using Docker
+
+```
+docker compose up
+```
+
+### Running the Application with the .NET CLI
+
+```
+dotnet build
+```
+
+Run your .NET Core Web API using the following command:
+
+```
+cd .\src\ShipManagement.Api\
+```
+
+```
+dotnet run
+```
+
+or
+
+```
+dotnet watch run
+```
+
+Run your .NET Core Test project using the following command:
+
+```
+cd .\tests\ShipManagement.Api.Tests\
+
+or
+
+cd .\tests\ShipManagement.Application.Tests\
+
+or
+
+cd .\tests\ShipManagement.Infrasructure.Tests\
+
+```
+
+```
+dotnet test
+```
 
 ### Prerequisites
 
 1. Downlaod .NET Core SDK for Windows
 
 ```
-https://dotnet.microsoft.com/download 
+https://dotnet.microsoft.com/download
 ```
 
 2. .NET Core SDK CLI for Mac
@@ -50,148 +106,117 @@ brew install --cask dotnet-sdk
     5. FluentAssertions 6.12.0
     6. Moq 4.20.70
 
-### Installation
-
-#### Clone the repository:
-
-  Open your terminal or command prompt, go to the desired directory, and use the following command to clone the .NET Core Web API project:
-
-  ```
-  git clone https://github.com/maheshpeechamkoli/ship-management-service.git
-  cd ship-management-service
-  ```
-
-#### Build the project:
-
-  ```
-  dotnet build
-  ```
-
-### Running the Application
-
-Run your .NET Core Web API using the following command:
-
-```
-cd .\src\ShipManagement.Api\
-```
-
-```
-dotnet run 
-```
-
-or 
-
-```
-dotnet watch run
-```
-
 ## API Documentation
 
 ### Crete API
 
 #### Request Body
 
-  ```
-  POST  {{host}}/ship/create
-  Content-Type: application/json
-  
-  {
-    "name":"LongShip",
-    "length": 101,
-    "width": 202,
-    "code": "AAAA-1234-E5"
-  }
-  ```
+```
+POST  {{host}}/ship/create
+Content-Type: application/json
+
+{
+  "name":"LongShip",
+  "length": 101,
+  "width": 202,
+  "code": "AAAA-1234-E5"
+}
+```
 
 #### Response Body
 
-  Status Code : 200
-  ```
-  {
-    "success": true,
-    "message": "Ship created successfully"
-  }
-  ```
+Status Code : 200
+
+```
+{
+  "success": true,
+  "message": "Ship created successfully"
+}
+```
 
 ### List API
 
 #### Request Body
 
-  ```
-  GET  {{host}}/ship/list
-  Content-Type: application/json
-  ```
+```
+GET  {{host}}/ship/list
+Content-Type: application/json
+```
 
 #### Response Body
 
-  Status Code : 200
-  ```
-  [
-    {
-      "id": "c56268a5-661e-418f-9b27-4be0e424c6d5",
-      "name": "LongShip",
-      "length": 101,
-      "width": 202,
-      "code": "AAAA-1234-E5"
-    }
-  ]
-  ```
+Status Code : 200
+
+```
+[
+  {
+    "id": "c56268a5-661e-418f-9b27-4be0e424c6d5",
+    "name": "LongShip",
+    "length": 101,
+    "width": 202,
+    "code": "AAAA-1234-E5"
+  }
+]
+```
 
 ### Update API
 
 #### Request Body
 
-  ```
-  PUT  {{host}}/ship/update/{Id}
-  Content-Type: application/json
-  ```
+```
+PUT  {{host}}/ship/update/{Id}
+Content-Type: application/json
+```
 
-  ```
-  {
-      "name": "WhiteShip",
-      "length": 120,
-      "width": 122,
-      "code": "AAAA-1111-A1"
-  }
-  ```
+```
+{
+    "name": "WhiteShip",
+    "length": 120,
+    "width": 122,
+    "code": "AAAA-1111-A1"
+}
+```
 
-#### Response Body 
+#### Response Body
 
-  Status Code : 200
-  ```
-  {
-    "success": true,
-    "message": "Ship updated successfully"
-  }
-  ```
+Status Code : 200
+
+```
+{
+  "success": true,
+  "message": "Ship updated successfully"
+}
+```
 
 ### Delete API
 
 #### Request Body
 
-  ```
-  DELETE  {{host}}/ship/delete/{id}
-  Content-Type: application/json
-  ```
+```
+DELETE  {{host}}/ship/delete/{id}
+Content-Type: application/json
+```
 
 #### Response Body
 
-  Status Code : 200
-  ```
-  {
-    "success": true,
-    "message": "Ship deleted successfully"
-  }
-  ```
+Status Code : 200
+
+```
+{
+  "success": true,
+  "message": "Ship deleted successfully"
+}
+```
 
 ## Folder Structure
 
 ### --src
 
-![Folder structure](assets/CleanArchitectureFolderStructure.jpg)
+![Folder structure](assets/clean-architecture-img.jpg)
 
 ### --tests
 
-![Folder structure](assets/TestFolderStructure.png)
+![Folder structure](assets/test-img.png)
 
-
+### Thank you
