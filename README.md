@@ -29,13 +29,14 @@ cd ship-management-service
 ### Running the Application using Docker
 
 ```
+docker-compose build
 docker compose up
 ```
 
 Open the swagger URL
 
 ```
-http://localhost:5001/swagger/index.html
+http://localhost:5148/swagger/index.html
 ```
 
 Or

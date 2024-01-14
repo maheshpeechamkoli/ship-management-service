@@ -32,7 +32,14 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
-    app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173"));
+    // For specific port
+    //app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173"));
+    app.UseCors(builder =>
+    builder
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin()
+    );
     app.UseHttpsRedirection();
     app.MapControllers();
     app.Run();
