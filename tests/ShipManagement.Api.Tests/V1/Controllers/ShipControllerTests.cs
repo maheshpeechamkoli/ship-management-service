@@ -8,6 +8,7 @@ using ShipManagement.Api.V1.Controllers;
 using ShipManagement.Contracts.Ships;
 using ShipManagement.Application.Services.Common;
 using ShipManagement.Application.Services.ShipServices;
+using System.Net;
 
 
 namespace ShipManagement.Api.Tests.V1.Controllers;
@@ -37,13 +38,13 @@ public partial class ShipControllerTests
 
         // Mocking a success result from the service
         _serviceMock.Setup(x => x.Create(It.IsAny<ShipModelRequest>()))
-                        .ReturnsAsync(ShipOperationResult.SuccessResult("Ship created successfully"));
+                        .ReturnsAsync(ShipOperationResult.SuccessResult((int)HttpStatusCode.Created, "Ship created successfully"));
 
         // Act
         var result = await _sut.Create(invalidRequest);
 
         // Assert
-        result.Should().BeAssignableTo<OkObjectResult>();
+        result.Should().BeOfType<ObjectResult>().Which.StatusCode.Should().Be((int)HttpStatusCode.Created);
     }
 
     [Fact]
@@ -54,13 +55,13 @@ public partial class ShipControllerTests
 
         // Mocking a success result from the service
         _serviceMock.Setup(x => x.Create(It.IsAny<ShipModelRequest>()))
-                        .ReturnsAsync(ShipOperationResult.FailureResult("A ship with the same code already exists"));
+                        .ReturnsAsync(ShipOperationResult.FailureResult((int)HttpStatusCode.Conflict, "A ship with the same code already exists"));
 
         // Act
         var result = await _sut.Create(invalidRequest);
 
         // Assert
-        result.Should().BeAssignableTo<BadRequestObjectResult>();
+        result.Should().BeOfType<ObjectResult>().Which.StatusCode.Should().Be((int)HttpStatusCode.Conflict);
     }
 
 
