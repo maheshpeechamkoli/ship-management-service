@@ -37,10 +37,7 @@ public class ShipController(IShipService shipService) : ControllerBase
         };
         var shipResult = await _shipService.Create(shipRequest);
 
-        if (shipResult.Success)
-            return Ok(shipResult);
-
-        return BadRequest(shipResult.Message);
+        return StatusCode(shipResult.StatusCode, shipResult);
     }
 
     /// <summary>
@@ -59,7 +56,7 @@ public class ShipController(IShipService shipService) : ControllerBase
     public async Task<IActionResult> GetAllShips()
     {
         var response = await _shipService.GetAllShips();
-        //return Ok(allShips);
+
         return response != null ? Ok(response) : NotFound();
     }
 
@@ -89,12 +86,7 @@ public class ShipController(IShipService shipService) : ControllerBase
         };
         var updateResult = await _shipService.Update(id, shipRequest);
 
-        if (updateResult.Success)
-        {
-            return Ok(updateResult);
-        }
-
-        return BadRequest(updateResult);
+        return StatusCode(updateResult.StatusCode, updateResult);
     }
 
     /// <summary>
@@ -115,12 +107,7 @@ public class ShipController(IShipService shipService) : ControllerBase
     {
         var deleteResult = await _shipService.Delete(id);
 
-        if (deleteResult.Success)
-        {
-            return Ok(deleteResult);
-        }
-
-        return BadRequest(deleteResult);
+        return StatusCode(deleteResult.StatusCode, deleteResult);
     }
 
 }

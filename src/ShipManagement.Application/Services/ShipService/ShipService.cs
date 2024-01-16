@@ -1,3 +1,4 @@
+using System.Net;
 using ShipManagement.Application.Interfaces.Persistence;
 using ShipManagement.Application.Services.Common;
 using ShipManagement.Domain.Entities;
@@ -15,7 +16,7 @@ public class ShipService(IShipRepository shipRepository) : IShipService
         var existingShip = await _shipRepository.GetByCodeAsync(shipRequest.Code);
         if (existingShip != null)
         {
-            return ShipOperationResult.FailureResult("A ship with the same code already exists");
+            return ShipOperationResult.FailureResult((int)HttpStatusCode.Conflict, "A ship with the same code already exists");
         }
 
         // If no duplicate, proceed with creating the ship
@@ -28,7 +29,7 @@ public class ShipService(IShipRepository shipRepository) : IShipService
         };
         await _shipRepository.AddAsync(ship);
 
-        return ShipOperationResult.SuccessResult("Ship created successfully");
+        return ShipOperationResult.SuccessResult((int)HttpStatusCode.Created, "Ship created successfully");
     }
 
     public Task<List<Ship>> GetAllShips()
@@ -45,7 +46,7 @@ public class ShipService(IShipRepository shipRepository) : IShipService
             // Check if a ship with the same code already exists expect with this id
             if (await _shipRepository.IsCodeAlreadyExistedAsync(existingShip.Id, shipRequest.Code))
             {
-                return ShipOperationResult.FailureResult("A ship with the same code already exists");
+                return ShipOperationResult.FailureResult((int)HttpStatusCode.Conflict, "A ship with the same code already exists");
             }
 
             existingShip.Name = shipRequest.Name;
@@ -55,10 +56,10 @@ public class ShipService(IShipRepository shipRepository) : IShipService
 
             await _shipRepository.UpdateAsync(existingShip);
 
-            return ShipOperationResult.SuccessResult("Ship updated successfully");
+            return ShipOperationResult.SuccessResult((int)HttpStatusCode.OK, "Ship updated successfully");
         }
 
-        return ShipOperationResult.FailureResult("Ship not found for update");
+        return ShipOperationResult.FailureResult((int)HttpStatusCode.NotFound, "Ship not found for update");
     }
 
     public async Task<ShipOperationResult> Delete(Guid id)
@@ -68,10 +69,10 @@ public class ShipService(IShipRepository shipRepository) : IShipService
         if (shipToDelete != null)
         {
             await _shipRepository.DeleteAsync(id);
-            return ShipOperationResult.SuccessResult("Ship deleted successfully");
+            return ShipOperationResult.SuccessResult((int)HttpStatusCode.OK, "Ship deleted successfully");
         }
 
-        return ShipOperationResult.FailureResult("Ship not found for deletion");
+        return ShipOperationResult.FailureResult((int)HttpStatusCode.NotFound, "Ship not found for deletion");
     }
 
 
